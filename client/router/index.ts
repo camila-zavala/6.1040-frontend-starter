@@ -38,13 +38,7 @@ const router = createRouter({
       path: "/profile",
       name: "Profile",
       component: ProfileView,
-      meta: { requiresAuth: false },
-      beforeEnter: (to, from) => {
-        const { isLoggedIn } = storeToRefs(useUserStore());
-        if (isLoggedIn.value) {
-          return { name: "Profile" };
-        }
-      },
+      meta: { requiresAuth: true },
     },
     {
       path: "/:catchAll(.*)",

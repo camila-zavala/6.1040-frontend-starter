@@ -5,6 +5,8 @@ import { BadValuesError, NotAllowedError, NotFoundError } from "./errors";
 export interface UserDoc extends BaseDoc {
   username: string;
   password: string;
+  rating: number;
+  numRatings: number;
 }
 
 export default class UserConcept {
@@ -12,7 +14,9 @@ export default class UserConcept {
 
   async create(username: string, password: string) {
     await this.canCreate(username, password);
-    const _id = await this.users.createOne({ username, password });
+    const rating = 100;
+    const numRatings = 1;
+    const _id = await this.users.createOne({ username, password, rating, numRatings });
     return { msg: "User created successfully!", user: await this.users.readOne({ _id }) };
   }
 
@@ -65,6 +69,7 @@ export default class UserConcept {
     if (update.username !== undefined) {
       await this.isUsernameUnique(update.username);
     }
+    this.sanitizeUpdate(update);
     await this.users.updateOne({ _id }, update);
     return { msg: "User updated successfully!" };
   }
@@ -91,6 +96,34 @@ export default class UserConcept {
   private async isUsernameUnique(username: string) {
     if (await this.users.readOne({ username })) {
       throw new NotAllowedError(`User with username ${username} already exists!`);
+    }
+  }
+  async rateUser(_id: ObjectId, rate: number) {
+    const maybeUser = await this.users.readOne({ _id });
+    console.log(maybeUser, _id);
+    if (maybeUser === null) {
+      throw new NotFoundError(`User not found!`);
+    }
+    let newTotal = maybeUser.numRatings + 1;
+    let newRating = maybeUser.numRatings * maybeUser.rating + rate; //newTotal
+    maybeUser.numRatings = newTotal;
+    maybeUser.rating = newRating;
+  }
+  async getRating(_id: ObjectId) {
+    const maybeUser = await this.users.readOne({ _id });
+    console.log(maybeUser, _id);
+    if (maybeUser === null) {
+      throw new NotFoundError(`User not found!`);
+    }
+    return maybeUser.rating;
+  }
+  private sanitizeUpdate(update: Partial<UserDoc>) {
+    // Make sure the update cannot change the author.
+    const allowedUpdates = ["password", "username"];
+    for (const key in update) {
+      if (!allowedUpdates.includes(key)) {
+        throw new NotAllowedError(`Cannot update '${key}' field!`);
+      }
     }
   }
 }

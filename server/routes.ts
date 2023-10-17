@@ -2,8 +2,11 @@ import { ObjectId } from "mongodb";
 
 import { Router, getExpressRouter } from "./framework/router";
 
-import { Friend, Post, User, WebSession } from "./app";
+import { Comment, DirectMessage, Friend, Post, Profile, Reaction, SpotDiscovery, User, WebSession } from "./app";
 import { PostDoc, PostOptions } from "./concepts/post";
+import { ProfileDoc } from "./concepts/profile";
+import ReactionConcept, { ReactionDoc } from "./concepts/reaction";
+import { LocationsDoc, ReviewsDocs } from "./concepts/spotdiscovery";
 import { UserDoc } from "./concepts/user";
 import { WebSessionDoc } from "./concepts/websession";
 import Responses from "./responses";
@@ -135,6 +138,122 @@ class Routes {
     const user = WebSession.getUser(session);
     const fromId = (await User.getUserByUsername(from))._id;
     return await Friend.rejectRequest(fromId, user);
+  }
+
+  @Router.post("/directMessege")
+  async sendMessage(session: WebSessionDoc, to: string, messege: string) {
+    const user = WebSession.getUser(session);
+    const toId = (await User.getUserByUsername(to))._id;
+    return await DirectMessage.sendMessage(user, messege, toId, null);
+  }
+  @Router.put("/directMessege/:id")
+  async editMessage(session: WebSessionDoc, id: ObjectId, new_message: string) {
+    const user = WebSession.getUser(session);
+    return await DirectMessage.editMessage(user, id, new_message);
+  }
+  @Router.delete("/directMessege/:id")
+  async deleteMessage(session: WebSessionDoc, id: ObjectId) {
+    const user = WebSession.getUser(session);
+    return await DirectMessage.deleteMessage(user, id);
+  }
+  @Router.post("/directMessage/:id")
+  async reactMessage(user: string, reaction: ReactionConcept, message: string) {
+    throw new Error("not implemented yet");
+  }
+
+  @Router.post("/reaction")
+  async createReaction(session: WebSessionDoc, id: ObjectId, reaction: string) {
+    const user = WebSession.getUser(session);
+    return await Reaction.createReaction(user, id, reaction);
+  }
+  @Router.delete("/reaction/delete/:id")
+  async deleteReaction(session: WebSessionDoc, id: ObjectId) {
+    const user = WebSession.getUser(session);
+    return await Reaction.removeReaction(user, id);
+  }
+  @Router.post("/reaction/user/:notify")
+  async notifyReaction(from: UserDoc, to: UserDoc, reaction: ReactionDoc) {
+    throw new Error("not implemented yet");
+  }
+  @Router.get("/reaction/:id")
+  async getReactions(id: ObjectId) {
+    return await Reaction.getReactionsForPost(id);
+  }
+
+  @Router.post("/comment")
+  async createComment(session: WebSessionDoc, username: string, comment: string, id: ObjectId) {
+    const user = WebSession.getUser(session);
+    return await Comment.createComment(user, comment, id);
+  }
+
+  @Router.delete("/comment/:id")
+  async deleteComment(session: WebSessionDoc, id: ObjectId) {
+    const user = WebSession.getUser(session);
+    return await Comment.deleteComment(user, id);
+  }
+  @Router.post("/comment/:notify")
+  async notifyUser(to: UserDoc, from: UserDoc) {
+    throw new Error("not implemented yet");
+  }
+  @Router.get("/comments")
+  async getComments(id: ObjectId) {
+    return await Comment.getComments(id);
+  }
+  @Router.post("/user/:rate")
+  async rateUser(username: string, rate: number) {
+    const id = (await User.getUserByUsername(username))._id;
+    return await User.rateUser(id, rate);
+  }
+  @Router.get("/user/:rating")
+  async updateRating(session: WebSessionDoc) {
+    const id = WebSession.getUser(session);
+    return await User.getRating(id);
+  }
+
+  @Router.post("/profile")
+  async createProfile(session: WebSessionDoc, name: string, biography: string, picture: string) {
+    const user = WebSession.getUser(session);
+    return await Profile.createProfile(user, name, biography, picture, []);
+  }
+
+  @Router.put("/profile/:edit")
+  async editProfile(session: WebSessionDoc, profile: string, update: Partial<ProfileDoc>) {
+    const user = WebSession.getUser(session);
+    const profile_id = (await Profile.getProfile(profile))._id;
+    return await Profile.updateProfile(profile_id, update);
+  }
+  @Router.get("/profile")
+  async getProfile(name: string) {
+    return await Profile.getProfile(name);
+  }
+
+  @Router.post("/spotdiscovery")
+  async createSpot(session: WebSessionDoc, name: string, photos: Array<string>, reviews: Array<ReviewsDocs>) {
+    const user = WebSession.getUser(session);
+    return await SpotDiscovery.createSpot(user, name, photos, reviews);
+  }
+  @Router.put("/spotdiscovery/:id")
+  async addImage(session: WebSessionDoc, location: string, update: Partial<LocationsDoc>) {
+    const user = WebSession.getUser(session);
+    const location_id = (await SpotDiscovery.getLocation(location))._id;
+    return await SpotDiscovery.addImage(location_id, user, update);
+  }
+  @Router.put("/spotdiscovery/:id")
+  async updateReview(session: WebSessionDoc, id: ObjectId, update: Partial<ReviewsDocs>) {
+    const user = WebSession.getUser(session);
+    return await SpotDiscovery.updateReview(user, id, update);
+  }
+
+  @Router.delete("/spotdiscovery/delete/:id")
+  async deleteReview(session: WebSessionDoc, id: ObjectId) {
+    const user = WebSession.getUser(session);
+    return await SpotDiscovery.deleteReview(user, id);
+  }
+
+  @Router.get("/spotdiscovery/location/: getReviews")
+  async getReviews(location: string) {
+    const location_id = (await SpotDiscovery.getLocation(location))._id;
+    return await SpotDiscovery.getReviews(location_id);
   }
 }
 

@@ -36,8 +36,8 @@ onBeforeMount(async () => {
         </li>
         <li v-if="isLoggedIn">
           <RouterLink :to="{ name: 'Settings' }" :class="{ underline: currentRouteName == 'Settings' }"> Settings </RouterLink>
-
           <RouterLink :to="{name: 'Profile'}" :class="{ underline: currentRouteName == 'Profile'}">Profile</RouterLink>
+          <RouterLink :to="{name: 'SpotDiscovery'}" :class="{underline: currentRouteName == 'Spot Discovery'}">Spot Discovery</RouterLink>
         </li>
         <li v-else>
           <RouterLink :to="{ name: 'Login' }" :class="{ underline: currentRouteName == 'Login' }"> Login </RouterLink>

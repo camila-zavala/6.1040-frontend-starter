@@ -2,11 +2,19 @@ import { storeToRefs } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
 
 import { useUserStore } from "@/stores/user";
+import "vue-horizontal-scroll/dist/vue-horizontal-scroll.css";
+import BostonView from "../views/BostonView.vue";
+import CharlesRiverView from "../views/CharlesRiverView.vue";
+import CommonsView from "../views/CommonsView.vue";
+import FenwayView from "../views/FenwayView.vue";
 import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
+import MITView from "../views/MITView.vue";
+import NewburyView from "../views/NewburyView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import SettingView from "../views/SettingView.vue";
+import SpotDiscoveryView from "../views/SpotDiscoveryView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -38,6 +46,48 @@ const router = createRouter({
       path: "/profile",
       name: "Profile",
       component: ProfileView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/spotdiscovery",
+      name: "SpotDiscovery",
+      component: SpotDiscoveryView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/fenway",
+      name: "Fenway",
+      component: FenwayView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/boston",
+      name: "Boston",
+      component: BostonView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/commons",
+      name: "Commons",
+      component: CommonsView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/charles_river",
+      name: "Charles",
+      component: CharlesRiverView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/mit",
+      name: "MIT",
+      component: MITView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/newbury",
+      name: "Newbury",
+      component: NewburyView,
       meta: { requiresAuth: true },
     },
     {

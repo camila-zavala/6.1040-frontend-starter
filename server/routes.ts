@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 
-import { Router, getExpressRouter } from "./framework/router";
+import { getExpressRouter, Router } from "./framework/router";
 
 import { Comment, DirectMessage, Friend, Post, Profile, Reaction, SpotDiscovery, User, WebSession } from "./app";
 import { PostDoc, PostOptions } from "./concepts/post";
@@ -41,9 +41,11 @@ class Routes {
   }
 
   @Router.delete("/users")
-  async deleteUser(session: WebSessionDoc) {
+  async deleteUser(session: WebSessionDoc, name: string) {
     const user = WebSession.getUser(session);
     WebSession.end(session);
+    const profile_id = (await Profile.getProfile(name))._id;
+    await Profile.deleteProfile(profile_id);
     return await User.delete(user);
   }
 

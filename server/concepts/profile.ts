@@ -21,12 +21,19 @@ export default class ProfileConcept {
   private allProfiles = new DocCollection<ProfileDoc>("profiles");
 
   async createProfile(user: ObjectId, name: string, biography: string, profilePicture: string, friends: Array<ObjectId>) {
-    const profile_id = await this.allProfiles.createOne({ user, name, biography, profilePicture, friends });
+    console.log("The BIO", biography);
+    const profile = await this.allProfiles.readOne({ name });
+    console.log("profile", profile, "bio", biography);
+    if (profile == null) {
+      await this.allProfiles.createOne({ user, name, biography, profilePicture, friends });
+    } else {
+      this.allProfiles.updateOne({ _id: profile._id }, { user, name, biography, profilePicture, friends });
+    }
     return "Profile created!";
   }
-  async updateProfile(profile_id: ObjectId, update: Partial<ProfileDoc>) {
+  async updateProfile(_id: ObjectId, update: Partial<ProfileDoc>) {
     this.sanitizeUpdate(update);
-    await this.allProfiles.updateOne({ profile_id }, update);
+    await this.allProfiles.updateOne({ _id }, update);
     return "Profile updated sucessfully";
   }
 
@@ -38,6 +45,7 @@ export default class ProfileConcept {
 
   async getProfile(name: string) {
     const profile = await this.allProfiles.readOne({ name });
+    console.log("getProfile", name, profile);
     if (profile === null) {
       throw new NotFoundError(`Location not found!`);
     }

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import Profile from "@/components/Profile/ProfileComponent.vue";
+import CreateProfile from "@/components/Profile/CreateProfile.vue";
 </script>
 
 
 <template>
   <main class="column">
     <h1>Profile</h1>
-    <Profile />
+    <CreateProfile />
   </main>
 </template>

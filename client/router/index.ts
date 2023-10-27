@@ -6,6 +6,7 @@ import "vue-horizontal-scroll/dist/vue-horizontal-scroll.css";
 import BostonView from "../views/BostonView.vue";
 import CharlesRiverView from "../views/CharlesRiverView.vue";
 import CommonsView from "../views/CommonsView.vue";
+import CreateProfileView from "../views/CreateProfileView.vue";
 import FenwayView from "../views/FenwayView.vue";
 import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
@@ -41,6 +42,12 @@ const router = createRouter({
           return { name: "Settings" };
         }
       },
+    },
+    {
+      path: "/profile",
+      name: "CreateProfile",
+      component: CreateProfileView,
+      meta: { requiresAuth: true },
     },
     {
       path: "/profile",

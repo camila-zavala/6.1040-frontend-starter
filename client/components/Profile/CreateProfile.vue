@@ -8,6 +8,7 @@ import { onBeforeMount } from "vue";
 import CreatePostForm from "@/components/Post/CreatePostForm.vue";
 import EditPostForm from "@/components/Post/EditPostForm.vue";
 import PostComponent from "@/components/Post/PostComponent.vue";
+import router from "../../router";
 
 const { loginUser, updateSession, isLoggedIn, currentUsername } = useUserStore();
 
@@ -16,16 +17,18 @@ const props = defineProps(["post"]);
 export type BodyT = string | number | boolean | null | BodyT[] | { [key: string]: BodyT };
 
 const name = ref(useUserStore().currentUsername);
-const bio = ref("");
+const biography = ref("");
 
 const emit = defineEmits(["refreshPosts"]);
 
-const createProfile = async (name:string, bio:string ) => {
+const createProfile = async (name:string, biography:string ) => {
   updateSession();
+  console.log("FFF", name, biography);
   try {
     await fetchy("/api/profile", "POST", {
-      body: {name, bio},
+      body: {name, biography},
     });
+    await router.push({name: "Home"});
   } catch (_) {
     return;
   }
@@ -60,11 +63,11 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <form @submit.prevent="createProfile(name, bio)">
+  <form @submit.prevent="createProfile(name, biography)">
     <h2>Name:</h2>
     <textarea id="content" v-model="name" required> </textarea>
     <h2>Short Bio:</h2>
-    <textarea id="content" v-model="bio" placeholder="Short Description of Yourself" required> </textarea>
+    <textarea id="content" v-model="biography" placeholder="Short Description of Yourself" required> </textarea>
     <section >
       <h2>Create a post:</h2>
       <CreatePostForm @refreshPosts="getPosts" />

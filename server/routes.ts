@@ -142,18 +142,35 @@ class Routes {
     return await Friend.rejectRequest(fromId, user);
   }
 
-  @Router.post("/directMessege")
+  @Router.post("/directMessage")
   async sendMessage(session: WebSessionDoc, to: string, messege: string) {
     const user = WebSession.getUser(session);
     const toId = (await User.getUserByUsername(to))._id;
     return await DirectMessage.sendMessage(user, messege, toId, null);
   }
-  @Router.put("/directMessege/:id")
+  @Router.get("/directMessage")
+  async getMessages(author: string) {
+    let authored;
+    const id = (await User.getUserByUsername(author))._id;
+    authored = await DirectMessage.getByAuthor(id);
+    return await Responses.messages(authored);
+  }
+  @Router.get("/directMessage/recieved")
+  async getMessagesRecieved(to: string) {
+    let recieved;
+    const id = (await User.getUserByUsername(to))._id;
+    console.log(id);
+    recieved = await DirectMessage.getByReciever(id);
+    console.log("do we make it here", recieved);
+    return await Responses.messages(recieved);
+  }
+
+  @Router.put("/directMessage/:id")
   async editMessage(session: WebSessionDoc, id: ObjectId, new_message: string) {
     const user = WebSession.getUser(session);
     return await DirectMessage.editMessage(user, id, new_message);
   }
-  @Router.delete("/directMessege/:id")
+  @Router.delete("/directMessage/:id")
   async deleteMessage(session: WebSessionDoc, id: ObjectId) {
     const user = WebSession.getUser(session);
     return await DirectMessage.deleteMessage(user, id);
@@ -213,9 +230,10 @@ class Routes {
   }
 
   @Router.post("/profile")
-  async createProfile(session: WebSessionDoc, name: string, biography: string, picture: string) {
+  async createProfile(session: WebSessionDoc, name: string, biography: string) {
     const user = WebSession.getUser(session);
-    return await Profile.createProfile(user, name, biography, picture, []);
+    console.log("GGG", user, name, biography);
+    return await Profile.createProfile(user, name, biography, "", []);
   }
 
   @Router.put("/profile/:edit")
@@ -226,6 +244,7 @@ class Routes {
   }
   @Router.get("/profile")
   async getProfile(name: string) {
+    console.log(await Profile.getProfile(name));
     return await Profile.getProfile(name);
   }
 

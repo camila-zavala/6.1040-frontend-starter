@@ -1,4 +1,5 @@
 import { User } from "./app";
+import { DirectMessageDoc } from "./concepts/directmessege";
 import { AlreadyFriendsError, FriendNotFoundError, FriendRequestAlreadyExistsError, FriendRequestDoc, FriendRequestNotFoundError } from "./concepts/friend";
 import { PostAuthorNotMatchError, PostDoc } from "./concepts/post";
 import { Router } from "./framework/router";
@@ -25,6 +26,11 @@ export default class Responses {
   static async posts(posts: PostDoc[]) {
     const authors = await User.idsToUsernames(posts.map((post) => post.author));
     return posts.map((post, i) => ({ ...post, author: authors[i] }));
+  }
+
+  static async messages(messages: DirectMessageDoc[]) {
+    const authors = await User.idsToUsernames(messages.map((message) => message.author));
+    return messages.map((message, i) => ({ ...message, author: authors[i] }));
   }
 
   /**

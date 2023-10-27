@@ -3,7 +3,6 @@ import router from "@/router";
 import { useUserStore } from "@/stores/user";
 import { ref } from "vue";
 
-
 const username = ref("");
 const password = ref("");
 const { loginUser, updateSession } = useUserStore();
@@ -31,9 +30,8 @@ async function boston() {
 
 <template>
   <form class="pure-form pure-form-aligned">
-    <fieldset>
-    
-    <h3>
+    <box-pics>
+      <div>
     <flexbox-item1 justify-content:center>
       <img src= "./images/general/fenway.png" @click = "fenway()" >
     </flexbox-item1>
@@ -43,8 +41,10 @@ async function boston() {
     <flexbox-item1 justify-content:center>
       <img src= "./images/general/kayaking.png" @click = "charles_river()">
     </flexbox-item1>
-    </h3>
-    <h3>
+  </div>
+  </box-pics>
+  <box-pics>
+    <div>
     <flexbox-item1 justify-content:center>
       <img src= "./images/general/boston.png" @click="boston()">
     </flexbox-item1>
@@ -54,21 +54,40 @@ async function boston() {
     <flexbox-item1 justify-content:center>
       <img src= "./images/general/mit_campus.png" @click="mit()">
     </flexbox-item1>
-    </h3>
-  </fieldset>
+  </div>
+  </box-pics>
   </form>
 </template>
 
 <style scoped>
 h3 {
   display: flex;
-  justify-content: center;
+  justify-content:end;
   background: #F5F1F1;
 }
 flexbox-item1 {
-    min-height: 200px;
-    min-width: 200px;
-    padding-left: 15px;
-    padding-inline: 15px;
+    min-height: auto;
+    min-width: auto;
+}
+
+end-move{
+  display: flex;
+  justify-content:end;
+}
+
+box-pics{
+  display: flex;
+  justify-content:center;
+  height: auto;
+  flex-direction: row;
+  background-color: #e9f1fb;
+}
+
+side-box {
+  display: flex;
+  justify-content:center;
+  height: 100%;
+  width: 800px;
+  background-color: #3269b7;
 }
 </style>

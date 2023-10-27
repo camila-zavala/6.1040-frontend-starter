@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Newbury from "@/components/Spot Discovery/Newbury.vue";
-import Review from "@/components/Spot Discovery/Reviews.vue";
 import { useUserStore } from "@/stores/user";
 import { storeToRefs } from "pinia";
 
@@ -12,7 +11,6 @@ const { currentUsername, isLoggedIn } = storeToRefs(useUserStore());
     <h3>Newbury</h3>
     <h4>
     <Newbury/>
-    <Review/>
     </h4>
   </main>
 </template>
@@ -21,10 +19,12 @@ const { currentUsername, isLoggedIn } = storeToRefs(useUserStore());
 h3 {
   display: flex;
   justify-content: center;
+  padding-top: 20px;
+  padding-bottom:20px;
+  background-color:rgb(228, 249, 249);
 }
 h4 {
   background: #F5F1F1;
-  height:auto;
 }
 flexbox-item1 {
     min-height: 200px;

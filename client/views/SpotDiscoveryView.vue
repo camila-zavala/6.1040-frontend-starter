@@ -17,5 +17,8 @@ const { currentUsername, isLoggedIn } = storeToRefs(useUserStore());
 h3 {
   display: flex;
   justify-content: center;
+  padding-top: 20px;
+  padding-bottom:20px;
+  background-color:rgb(228, 249, 249);
 }
 </style>

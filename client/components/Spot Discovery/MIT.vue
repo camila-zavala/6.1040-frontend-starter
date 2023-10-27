@@ -45,7 +45,43 @@ async function login() {
     </flexbox-item1>
 
     </gallery-container>
+    
     </h3>
+    
+    
+    <h3>
+      <h4>
+    <div>
+      <flexbox-item2>
+        Places to See @MIT:
+      </flexbox-item2>
+    </div>
+    <div>
+      <flexbox-description>
+        The dome: Killian Court is the best place to see the famour view of the dome.
+      </flexbox-description>
+      <flexbox-description>
+        Little dome: Lobby 7 is the best way to see the little dome from the outside.
+      </flexbox-description>
+      <flexbox-description>
+        Stata: The building is home to the Computer Science and Artificial Intelligence Laboratory (CSAIL). 
+      </flexbox-description>
+      <flexbox-description>
+        The Alfinite: The best way to go through the MIT campus when the weather is nice.
+      </flexbox-description>
+      <flexbox-description>
+        MIT Chapel: Explore the chapel near campus and its beautiful interior design.
+      </flexbox-description>
+      <flexbox-description>
+        Walker Memorial: The Memorial was to have been designed in a "relaxed classical style with a generous convex portico overlooking the Charles River".
+      </flexbox-description>
+      <flexbox-description>
+        Simmons Hall: If you want to see a dorm, Simmomns Hall is the most unique of them all.
+      </flexbox-description>
+    </div>
+  </h4>
+</h3>
+
   </div>
     
   </form>
@@ -60,9 +96,8 @@ h3 {
   background: #F5F1F1;
 }
 h4 {
-  display: flex;
-  align-content:flex-start;
   background: #F5F1F1;
+  height: 300px;
 }
 gallery-container {
   display: flex;
@@ -87,6 +122,25 @@ flexbox-reviews{
     justify-content: center;
     align-items: flex-start;
     min-width: 100px;
+    
+}
+
+flexbox-item2 {
+    padding-inline: 10px;
+    padding-bottom: 20px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    
+}
+
+flexbox-description {
+    padding-bottom: 10px;
+    justify-content: center;
+    display: flex;
+    display: column;
+    padding-inline: 20px;
+    font-size: 14px;
     
 }
 </style>

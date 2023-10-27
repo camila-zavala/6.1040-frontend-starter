@@ -8,12 +8,16 @@ import { storeToRefs } from "pinia";
 import { onBeforeMount, ref } from "vue";
 import SearchPostForm from "./SearchPostForm.vue";
 
+const props = defineProps(["author"]);
+
 const { isLoggedIn } = storeToRefs(useUserStore());
 
 const loaded = ref(false);
 let posts = ref<Array<Record<string, string>>>([]);
+// let profile = ref();
 let editing = ref("");
 let searchAuthor = ref("");
+let searchProfile = ref("");
 
 async function getPosts(author?: string) {
   let query: Record<string, string> = author !== undefined ? { author } : {};
@@ -27,18 +31,33 @@ async function getPosts(author?: string) {
   posts.value = postResults;
 }
 
+// async function getProfile(name?: string) {
+//   let query: Record<string, string> = name !== undefined ? { name } : {};
+//   let profileResults;
+//   try {
+//     profileResults = await fetchy("/api/profile", "GET", { query });
+//   } catch (_) {
+//     return;
+//   }
+//   profile.value = profileResults;
+// }
+
 function updateEditing(id: string) {
   editing.value = id;
 }
 
 onBeforeMount(async () => {
-  await getPosts();
+  await getPosts(props.author);
   loaded.value = true;
 });
 </script>
 
 <template>
   <section v-if="isLoggedIn">
+    <div class="row">
+    <!-- <h2 v-if="searchProfile">Profile {{ searchAuthor }}:</h2> -->
+    <!-- <SearchProfileForm @getProfileByname="getProfile" /> -->
+  </div>
     <h2>Create a post:</h2>
     <CreatePostForm @refreshPosts="getPosts" />
   </section>

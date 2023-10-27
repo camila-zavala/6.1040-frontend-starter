@@ -1,4 +1,4 @@
-import { ObjectId } from "mongodb";
+import { Filter, ObjectId } from "mongodb";
 import DocCollection, { BaseDoc } from "../framework/doc";
 import { NotAllowedError, NotFoundError } from "./errors";
 import ReactionConcept from "./reaction";
@@ -69,6 +69,21 @@ export default class DirectMessageConcept {
         react = new ReactionConcept();
       }
     }
+  }
+  async getMessages(query: Filter<DirectMessageDoc>) {
+    const messages = await this.allMessages.readMany(query, {
+      sort: { dateUpdated: -1 },
+    });
+    console.log("hi", messages);
+    return messages;
+  }
+
+  async getByAuthor(user: ObjectId) {
+    return await this.getMessages({ author: user });
+  }
+
+  async getByReciever(user: ObjectId) {
+    return await this.getMessages({ to: user });
   }
 }
 

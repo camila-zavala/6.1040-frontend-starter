@@ -14,12 +14,7 @@ async function login() {
 }
 
 
-
 </script>
-
-
-
-
 
 <template>
 
@@ -46,6 +41,39 @@ async function login() {
 
     </gallery-container>
     </h3>
+    
+    <h3>
+      <h4>
+    <div>
+      <flexbox-item2>
+        Things to Do in Boston Commons:
+      </flexbox-item2>
+    </div>
+    <div>
+      <flexbox-description>
+        Blue bike around the commons park
+      </flexbox-description>
+      <flexbox-description>
+        Watch a movie at the AMC - Boston Commons location right next to the commons
+      </flexbox-description>
+      <flexbox-description>
+        Visit "The Embrace" sculpture
+      </flexbox-description>
+      <flexbox-description>
+        See a multitude of flowers at the Boston Public Garden
+      </flexbox-description>
+      <flexbox-description>
+        Explore the Freedom Trail that offically begins in the commons.
+      </flexbox-description>
+      <flexbox-description>
+        Explore around Copley Square and Newbury street.
+      </flexbox-description>
+      <flexbox-description>
+        Explore Beacon Hill area and Acorn street nearby.
+      </flexbox-description>
+    </div>
+  </h4>
+</h3>
   </div>
   </form>
 </template>
@@ -57,11 +85,11 @@ h3 {
   display: flex;
   justify-content: center;
   background: #F5F1F1;
+  height: 100%;
 }
 h4 {
-  display: flex;
-  align-content:flex-start;
   background: #F5F1F1;
+  height: 300px;
 }
 gallery-container {
   display: flex;
@@ -86,6 +114,24 @@ flexbox-reviews{
     justify-content: center;
     align-items: flex-start;
     min-width: 100px;
+    
+}
+flexbox-item2 {
+    padding-inline: 10px;
+    padding-bottom: 20px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    
+}
+
+flexbox-description {
+    padding-bottom: 10px;
+    justify-content: center;
+    display: flex;
+    display: column;
+    padding-inline: 20px;
+    font-size: 14px;
     
 }
 </style>

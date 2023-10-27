@@ -24,39 +24,44 @@ onBeforeMount(async () => {
 <template>
   <header>
     <nav>
-      <div class="title">
-        <img src="@/assets/images/logo.svg" />
+      <div>
+    <settings-move>
+    <move-end>
+    <div class="title">
+        <img src="@/assets/images/real.jpg" />
         <RouterLink :to="{ name: 'Home' }">
-          <h1>Social Media App</h1>
+          <h1>InstaBook</h1>
         </RouterLink>
       </div>
+    </move-end>
+  </settings-move>
+  </div>
       <ul>
-        <li>
-          <RouterLink :to="{ name: 'Home' }" :class="{ underline: currentRouteName == 'Home' }"> Home </RouterLink>
-        </li>
-        <li v-if="isLoggedIn">
-          <RouterLink :to="{ name: 'Settings' }" :class="{ underline: currentRouteName == 'Settings' }"> Settings </RouterLink>
-          <RouterLink :to="{name: 'Profile'}" :class="{ underline: currentRouteName == 'Profile'}">Profile</RouterLink>
-          <RouterLink :to="{name: 'SpotDiscovery'}" :class="{underline: currentRouteName == 'Spot Discovery'}">Spot Discovery</RouterLink>
-        </li>
-        <li v-else>
-          <RouterLink :to="{ name: 'Login' }" :class="{ underline: currentRouteName == 'Login' }"> Login </RouterLink>
-        </li>
-      </ul>
-    </nav>
+        <ul><RouterLink :to="{ name: 'Home' }" :class="{ underline: currentRouteName == 'Home' }">Home</RouterLink></ul>
+      <ul>
+      <li v-if="isLoggedIn">
+      <ul><RouterLink :to="{ name: 'Settings' }" :class="{ underline: currentRouteName == 'Settings' }">Settings</RouterLink></ul>
+    <ul><RouterLink :to="{name: 'Profile'}" :class="{ underline: currentRouteName == 'Profile'}">Profile</RouterLink></ul>
+  <ul><RouterLink :to="{name: 'SpotDiscovery'}" :class="{underline: currentRouteName == 'Spot Discovery'}">Spot Discovery</RouterLink></ul>
+    </li>
+      <li v-else> 
+      <ul><RouterLink :to="{ name: 'Login' }" :class="{ underline: currentRouteName == 'Login' }">Login</RouterLink></ul>
+      </li>
+    </ul>
+    </ul>
     <article v-if="toast !== null" class="toast" :class="toast.style">
       <p>{{ toast.message }}</p>
     </article>
+  </nav> 
   </header>
   <RouterView />
 </template>
 
 <style scoped>
-@import "./assets/toast.css";
 
 nav {
   padding: 1em 2em;
-  background-color: lightgray;
+  background-color: rgb(192, 187, 226);
   display: flex;
   align-items: center;
 }
@@ -69,7 +74,7 @@ h1 {
 .title {
   display: flex;
   align-items: center;
-  gap: 0.5em;
+  gap: 0.3em;
 }
 
 img {
@@ -82,13 +87,25 @@ a {
   text-decoration: none;
 }
 
+settings-move{
+  justify-content: center;
+
+}
+
+move-end{
+  display: flex;
+  justify-content: center;
+}
+
 ul {
   list-style-type: none;
   margin-left: auto;
   display: flex;
   align-items: center;
+  justify-content: end;
   flex-direction: row;
-  gap: 1em;
+  gap: .8em;
+  color: white
 }
 
 .underline {

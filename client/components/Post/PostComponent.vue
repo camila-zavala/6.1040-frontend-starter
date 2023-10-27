@@ -1,12 +1,16 @@
 <script setup lang="ts">
+import Likes from "@/components/Likes.vue";
 import { useUserStore } from "@/stores/user";
 import { formatDate } from "@/utils/formatDate";
 import { storeToRefs } from "pinia";
+import { ref } from "vue";
 import { fetchy } from "../../utils/fetchy";
 
 const props = defineProps(["post"]);
-const emit = defineEmits(["editPost", "refreshPosts"]);
+const emit = defineEmits(["editPost", "refreshPosts", "refreshComments"]);
 const { currentUsername } = storeToRefs(useUserStore());
+
+const content = ref("");
 
 const deletePost = async () => {
   try {
@@ -16,6 +20,7 @@ const deletePost = async () => {
   }
   emit("refreshPosts");
 };
+
 </script>
 
 <template>
@@ -25,6 +30,12 @@ const deletePost = async () => {
     <menu v-if="props.post.author == currentUsername">
       <li><button class="btn-small pure-button" @click="emit('editPost', props.post._id)">Edit</button></li>
       <li><button class="button-error btn-small pure-button" @click="deletePost">Delete</button></li>
+      <Likes/>
+    </menu>
+    <menu v-else>
+      <Likes/>
+    </menu>
+    <menu>
     </menu>
     <article class="timestamp">
       <p v-if="props.post.dateCreated !== props.post.dateUpdated">Edited on: {{ formatDate(props.post.dateUpdated) }}</p>

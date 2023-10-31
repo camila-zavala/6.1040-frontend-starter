@@ -181,9 +181,9 @@ class Routes {
   }
 
   @Router.post("/reaction")
-  async createReaction(session: WebSessionDoc, id: ObjectId, reaction: string) {
+  async addReaction(session: WebSessionDoc, id: ObjectId) {
     const user = WebSession.getUser(session);
-    return await Reaction.createReaction(user, id, reaction);
+    return await Reaction.addReaction(user, id, 0);
   }
   @Router.delete("/reaction/delete/:id")
   async deleteReaction(session: WebSessionDoc, id: ObjectId) {

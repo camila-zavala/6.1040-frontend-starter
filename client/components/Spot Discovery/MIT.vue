@@ -43,6 +43,24 @@ async function login() {
     <flexbox-item1 justify-content:center>
       <img src= "./images/mit_campus/mit5.png">
     </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/mit_campus/mit6.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/mit_campus/mit7.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/mit_campus/mit8.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/mit_campus/mit9.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/mit_campus/mit10.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/mit_campus/mit11.png">
+    </flexbox-item1>
 
     </gallery-container>
     

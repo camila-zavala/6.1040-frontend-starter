@@ -39,7 +39,24 @@ async function login() {
     <flexbox-item1 justify-content:center>
       <img src= "./images/boston_city/boston5.png">
     </flexbox-item1>
-
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/boston_city/boston6.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/boston_city/boston7.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/boston_city/boston8.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/boston_city/boston9.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/boston_city/boston10.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/boston_city/boston11.png">
+    </flexbox-item1>
     </gallery-container>
     </h3>
     <h4>

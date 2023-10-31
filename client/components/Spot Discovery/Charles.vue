@@ -39,6 +39,24 @@ async function login() {
     <flexbox-item1 justify-content:center>
       <img src= "./images/charles_river/charles5.png">
     </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/charles_river/charles6.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/charles_river/charles7.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/charles_river/charles8.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/charles_river/charles9.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/charles_river/charles10.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/charles_river/charles11.png">
+    </flexbox-item1>
 
     </gallery-container>
     </h3>

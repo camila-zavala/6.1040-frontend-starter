@@ -38,6 +38,24 @@ async function login() {
     <flexbox-item1 justify-content:center>
       <img src= "./images/newbury_street/newbury5.png">
     </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/newbury_street/newbury6.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/newbury_street/newbury7.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/newbury_street/newbury8.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/newbury_street/newbury9.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/newbury_street/newbury10.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/newbury_street/newbury11.png">
+    </flexbox-item1>
     </gallery-container>
     </h3>
     

@@ -39,6 +39,24 @@ async function login() {
     <flexbox-item1 justify-content:center>
       <img src= "./images/fenway/fenway5.png">
     </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/fenway/fenway6.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/fenway/fenway7.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/fenway/fenway8.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/fenway/fenway9.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/fenway/fenway10.png">
+    </flexbox-item1>
+    <flexbox-item1 justify-content:center>
+      <img src= "./images/fenway/fenway1.png">
+    </flexbox-item1>
 
     </gallery-container>
     </h3>

@@ -2,7 +2,8 @@
 import { useUserStore } from '@/stores/user';
 import { defineEmits, defineProps, ref } from 'vue';
 
-  const props = defineProps({like: {default: 0}
+
+  const props = defineProps({like: {default: Math.random()}
   });
 
   const emit = defineEmits(['like']);
@@ -32,6 +33,8 @@ import { defineEmits, defineProps, ref } from 'vue';
         likes.value --;
     }
   }
+
+
 </script>
 
 <template>

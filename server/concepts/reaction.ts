@@ -8,15 +8,20 @@ import { UserDoc } from "./user";
 export interface ReactionDoc extends BaseDoc {
   author: ObjectId;
   media: ObjectId;
-  reaction: string;
+  likes: number;
 }
 
 export default class ReactionConcept {
   private allReactions = new DocCollection<ReactionDoc>("Reactions");
 
-  async createReaction(author: ObjectId, id: ObjectId, reaction: string) {
-    const messgae_id = await this.allReactions.createOne({ author, media: id, reaction });
-    return "reaction made successfully";
+  async addReaction(author: ObjectId, id: ObjectId, likes: number) {
+    const reaction_id = await this.allReactions.readOne({ media: id });
+    if (reaction_id !== null) {
+      reaction_id.likes += 1;
+    } else {
+      const _id = await this.allReactions.createOne({ author, media: id, likes });
+      return "reaction made successfully";
+    }
   }
   async getReactionsForPost(id: ObjectId) {
     const reactions = await this.allReactions.readMany({ media: id });
